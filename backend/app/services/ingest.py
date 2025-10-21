@@ -6,7 +6,7 @@ import json
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-def extract_text_from(file_path):
+def extract_text_from_pdf(file_path):
     text = ''
     with pdfplumber.open(file_path) as pdf:
         for page in pdf.pages:

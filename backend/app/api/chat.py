@@ -1,18 +1,22 @@
-from fastapi import APIRouter
-from app.services.retrieval import retrieval 
+from fastapi import APIRouter, Request 
+from app.services.retrieval import retrieval
 import os, requests
 
 router = APIRouter()
 
 @router.post("/ask")
-async def ask_question(data: dict):
+async def ask_question(data: dict, request: Request): 
     question = data["question"]
-    contexts = retrieval(question) 
+    
+    index = request.app.state.index
+    chunks = request.app.state.chunks
+    
+    contexts = retrieval(question, index=index, chunks=chunks) 
     context_text = "\n\n".join(contexts)
 
     prompt = f"""
     You are a helpful study tutor.
-    Use the contect belowto answer the question accurately.
+    Use the context below to answer the question accurately.
     Cite the sources if possible.
 
     Context:
@@ -20,7 +24,7 @@ async def ask_question(data: dict):
 
     Question: {question}
     """
-
+    
     gemini_api_key = os.getenv('GEMINI_API_KEY')
     if not gemini_api_key:
         return {"error": "GEMINI_API_KEY environment variable not set."}

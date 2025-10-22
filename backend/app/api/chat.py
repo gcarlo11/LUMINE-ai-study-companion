@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services.retrieval_service import retrieval_relevant_chunks
+from app.services.retrieval import retrieval 
 import os, requests
 
 router = APIRouter()
@@ -7,13 +7,13 @@ router = APIRouter()
 @router.post("/ask")
 async def ask_question(data: dict):
     question = data["question"]
-    contexts = retrieval_relevant_chunks(question)
+    contexts = retrieval(question) 
     context_text = "\n\n".join(contexts)
 
     prompt = f"""
     You are a helpful study tutor.
     Use the contect belowto answer the question accurately.
-    Cute the sources if possible.
+    Cite the sources if possible.
 
     Context:
     {context_text}
@@ -21,14 +21,26 @@ async def ask_question(data: dict):
     Question: {question}
     """
 
-    response = requests.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateText",
-        headers={"Authorization": f"Bearer {os.getenv('GEMINI_API_KEY')}"},
-        json={"prompt": {"text": prompt}}
-    )
+    gemini_api_key = os.getenv('GEMINI_API_KEY')
+    if not gemini_api_key:
+        return {"error": "GEMINI_API_KEY environment variable not set."}
 
-    result = response.json()
-    return {"answer": result.get["candidates"][0]["output"]}
-    result = response.json()
-    return {"answer": result["candidates"][0]["output"]}
+    try:
+        response = requests.post(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateText",
+            params={"key": gemini_api_key},
+            json={"prompt": {"text": prompt}}
+        )
 
+        response.raise_for_status() 
+        result = response.json()
+        
+        if "candidates" in result and len(result["candidates"]) > 0:
+            return {"answer": result["candidates"][0]["output"]}
+        else:
+            return {"error": "No valid response from Gemini.", "details": result}
+            
+    except requests.exceptions.RequestException as e:
+        return {"error": f"API request failed: {e}"}
+    except KeyError:
+        return {"error": "Invalid response structure from Gemini API.", "details": result}

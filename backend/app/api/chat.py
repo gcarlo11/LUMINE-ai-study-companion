@@ -1,13 +1,17 @@
-from fastapi import APIRouter, Request 
+from fastapi import APIRouter, Request
 from app.services.retrieval import retrieval
 import os, requests
+from pydantic import BaseModel
+
+class QuestionRequest(BaseModel):
+    question: str
 
 router = APIRouter()
 
 @router.post("/ask")
-async def ask_question(data: dict, request: Request): 
-    question = data["question"]
+async def ask_question(data: QuestionRequest, request: Request): 
     
+    question = data.question 
     index = request.app.state.index
     chunks = request.app.state.chunks
     
@@ -26,7 +30,10 @@ async def ask_question(data: dict, request: Request):
     """
     
     gemini_api_key = os.getenv('GEMINI_API_KEY')
+    
     if not gemini_api_key:
+        print("--- DEBUG: GAGAL! 'GEMINI_API_KEY' tidak ditemukan. ---")
+        print("--- DEBUG: Pastikan file .env ada dan server sudah DI-RESTART. ---")
         return {"error": "GEMINI_API_KEY environment variable not set."}
 
     try:
@@ -42,9 +49,13 @@ async def ask_question(data: dict, request: Request):
         if "candidates" in result and len(result["candidates"]) > 0:
             return {"answer": result["candidates"][0]["output"]}
         else:
+            print("--- DEBUG: Respons tidak valid dari Gemini ---")
+            print(result)
             return {"error": "No valid response from Gemini.", "details": result}
             
     except requests.exceptions.RequestException as e:
+        print(f"--- DEBUG: Error request ke Gemini (API Key salah/belum aktif?): {e} ---")
         return {"error": f"API request failed: {e}"}
     except KeyError:
+        print(f"--- DEBUG: KeyError saat memproses respons Gemini ---")
         return {"error": "Invalid response structure from Gemini API.", "details": result}

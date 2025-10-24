@@ -146,7 +146,6 @@ export default function ChatbotUI() {
       setIsLoading(false)
     }
         
-  
     // Simulate bot response
     // setTimeout(() => {
     //   const botMessage: Message = {
@@ -165,19 +164,20 @@ export default function ChatbotUI() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col h-[600px] bg-gradient-to-b from-[#1a1a2e] to-[#121212] rounded-2xl border border-[#7B2CBF]/30 shadow-2xl overflow-hidden"
+      className="flex flex-col h-[600px] bg-linear-to-b from-[#1a1a2e] to-[#121212] rounded-2xl border border-[#7B2CBF]/30 shadow-2xl overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD] px-6 py-4 border-b border-[#7B2CBF]/50">
+      <div className="bg-linear-to-r from-[#7B2CBF] to-[#9D4EDD] px-6 py-4 border-b border-[#7B2CBF]/50">
         <h1 className="text-xl font-bold text-white">AI Study Companion</h1>
         <div className="flex justify-between">
-          <p className="text-sm text-[#E0AAFF]/80">Created by gcarlo11</p>
-          <p className="text-sm text-[#E0AAFF]/50">Powered by Gemini</p>
+          <p className="text-sm text-[#E0AAFF]/80"> Empowering Every Learner with AI.</p>
+          <p className="text-sm text-[#E0AAFF]/40"> by github.com/gcarlo11</p>
+          {/* <p className="text-sm text-[#E0AAFF]/40">Powered by Gemini</p> */}
         </div>
       </div>
 
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 scrollbar-thin scrollbar-thumb-[#7B2CBF] scrollbar-track-[#2A2A2A]">
+      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 scrollbar-thin scrollbar-thumb-[#9D4EDD]/5 hover:scrollbar-thumb-[#C77DFF]/30 scrollbar-track-transparent">
         <AnimatePresence mode="popLayout">
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
@@ -198,14 +198,12 @@ export default function ChatbotUI() {
             disabled={isLoading}
             className="shrink-0 w-12 h-12 rounded-lg bg-linear-to-br from-[#7B2CBF] to-[#9D4EDD] text-white font-bold text-lg hover:shadow-lg hover:shadow-[#7B2CBF]/50 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
           >
-            <svg width="64px" height="64px" viewBox="-204.8 -204.8 1433.60 1433.60" className="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+            <svg viewBox="-4.8 -4.8 33.60 33.60" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path d="M736.68 435.86a173.773 173.773 0 0 1 172.042 172.038c0.578 44.907-18.093 87.822-48.461 119.698-32.761 34.387-76.991 51.744-123.581 52.343-68.202 0.876-68.284 106.718 0 105.841 152.654-1.964 275.918-125.229 277.883-277.883 1.964-152.664-128.188-275.956-277.883-277.879-68.284-0.878-68.202 104.965 0 105.842zM285.262 779.307A173.773 173.773 0 0 1 113.22 607.266c-0.577-44.909 18.09-87.823 48.461-119.705 32.759-34.386 76.988-51.737 123.58-52.337 68.2-0.877 68.284-106.721 0-105.842C132.605 331.344 9.341 454.607 7.379 607.266 5.417 759.929 135.565 883.225 285.262 885.148c68.284 0.876 68.2-104.965 0-105.841z" fill="#ffffff"></path>
-              <path d="M339.68 384.204a173.762 173.762 0 0 1 172.037-172.038c44.908-0.577 87.822 18.092 119.698 48.462 34.388 32.759 51.743 76.985 52.343 123.576 0.877 68.199 106.72 68.284 105.843 0-1.964-152.653-125.231-275.917-277.884-277.879-152.664-1.962-275.954 128.182-277.878 277.879-0.88 68.284 104.964 68.199 105.841 0z" fill="#ffffff"></path><path d="M545.039 473.078c16.542 16.542 16.542 43.356 0 59.896l-122.89 122.895c-16.542 16.538-43.357 16.538-59.896 0-16.542-16.546-16.542-43.362 0-59.899l122.892-122.892c16.537-16.542 43.355-16.542 59.894 0z" fill="#ffffff"></path><path d="M485.17 473.078c16.537-16.539 43.354-16.539 59.892 0l122.896 122.896c16.538 16.533 16.538 43.354 0 59.896-16.541 16.538-43.361 16.538-59.898 0L485.17 532.979c-16.547-16.543-16.547-43.359 0-59.901z" fill="#ffffff"></path>
-              <path d="M514.045 634.097c23.972 0 43.402 19.433 43.402 43.399v178.086c0 23.968-19.432 43.398-43.402 43.398-23.964 0-43.396-19.432-43.396-43.398V677.496c0.001-23.968 19.433-43.399 43.396-43.399z" fill="#fffff0"></path>
-              </g>
+            <g id="SVGRepo_iconCarrier"> 
+              <path d="M12 10.4V20M12 10.4C12 8.15979 12 7.03969 11.564 6.18404C11.1805 5.43139 10.5686 4.81947 9.81596 4.43597C8.96031 4 7.84021 4 5.6 4H4.6C4.03995 4 3.75992 4 3.54601 4.10899C3.35785 4.20487 3.20487 4.35785 3.10899 4.54601C3 4.75992 3 5.03995 3 5.6V16.4C3 16.9601 3 17.2401 3.10899 17.454C3.20487 17.6422 3.35785 17.7951 3.54601 17.891C3.75992 18 4.03995 18 4.6 18H7.54668C8.08687 18 8.35696 18 8.61814 18.0466C8.84995 18.0879 9.0761 18.1563 9.29191 18.2506C9.53504 18.3567 9.75977 18.5065 10.2092 18.8062L12 20M12 10.4C12 8.15979 12 7.03969 12.436 6.18404C12.8195 5.43139 13.4314 4.81947 14.184 4.43597C15.0397 4 16.1598 4 18.4 4H19.4C19.9601 4 20.2401 4 20.454 4.10899C20.6422 4.20487 20.7951 4.35785 20.891 4.54601C21 4.75992 21 5.03995 21 5.6V16.4C21 16.9601 21 17.2401 20.891 17.454C20.7951 17.6422 20.6422 17.7951 20.454 17.891C20.2401 18 19.9601 18 19.4 18H16.4533C15.9131 18 15.643 18 15.3819 18.0466C15.15 18.0879 14.9239 18.1563 14.7081 18.2506C14.465 18.3567 14.2402 18.5065 13.7908 18.8062L12 20" stroke="#f7f7f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"></path> 
+            </g>
             </svg>
           </motion.button>
 

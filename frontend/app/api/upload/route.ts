@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const backendFormData = new FormData()
     backendFormData.append("file", file)
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/upload`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/docs/upload`, {
       method: "POST",
       body: backendFormData,
     })

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import ReactMarkdown from 'react-markdown'
 
 interface Message {
   id: string
@@ -27,8 +28,13 @@ export default function ChatMessage({ message }: { message: Message }) {
             : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20"
         }`}
       >
-        <p className="text-sm leading-relaxed">{message.content}</p>
-        <p className={`text-xs mt-1 ${isUser ? "text-[#E0AAFF]/60" : "text-[#7B2CBF]/60"}`}>
+
+        {/* <p className="text-sm leading-relaxed"></p> */}
+        <div className="text-[12px]">
+          <ReactMarkdown>{message.content}</ReactMarkdown>
+        </div>
+        
+        <p className={`text-[10px] mt-1 ${isUser ? "text-[#E0AAFF]/60" : "text-[#7B2CBF]/60"}`}>
           {message.timestamp.toLocaleTimeString("id-ID", {
             hour: "2-digit",
             minute: "2-digit",

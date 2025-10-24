@@ -26,14 +26,14 @@ export default function ChatbotUI() {
       id: "1",
       type: "bot",
       content:
-        "Hi! I am Carlo, your friendly study assistant.",
+        "Hi! I am **Lumine**, your friendly study assistant.",
       timestamp: new Date(),
     },
     {
       id: "2",
       type: "bot",
       content:
-        "Silakan upload dokumen PDF untuk dianalisis atau ajukan pertanyaan kepada saya.",
+        "Please upload your **PDF document or notes** for study then ask me any question.",
       timestamp: new Date(),
     },
   ])
@@ -78,6 +78,7 @@ export default function ChatbotUI() {
       const botMessage: Message = {
         id: Date.now().toString(),
         type: "bot",
+        // content: `File processed successfully! Dokumen telah dianalisis dengan ${data.chunks || 0} chunks. ${data.analysis ? "Hasil analisis tersedia." : ""}`,
         content: `File processed successfully! Dokumen telah dianalisis dengan ${data.chunks || 0} chunks. ${data.analysis ? "Hasil analisis tersedia." : ""}`,
         timestamp: new Date(),
       }
@@ -87,7 +88,7 @@ export default function ChatbotUI() {
       const errorMessage: Message = {
         id: Date.now().toString(),
         type: "bot",
-        content: "Maaf, terjadi kesalahan saat memproses file. Silakan coba lagi.",
+        content: "Sorry, there was an issue on proccessing document. Please try again.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -128,7 +129,7 @@ export default function ChatbotUI() {
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "bot",
-        content: data.answer || "Maaf, saya tidak dapat memproses permintaan Anda saat ini.",
+        content: data.answer || "Sorry, I couldn't procced your request right now.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
@@ -138,7 +139,7 @@ export default function ChatbotUI() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "bot",
-        content: "Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.",
+        content: "Sorry, there was an issue on sending your message. Please try again.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage]);
@@ -168,11 +169,10 @@ export default function ChatbotUI() {
     >
       {/* Header */}
       <div className="bg-linear-to-r from-[#7B2CBF] to-[#9D4EDD] px-6 py-4 border-b border-[#7B2CBF]/50">
-        <h1 className="text-xl font-bold text-white">AI Study Companion</h1>
+        <h1 className="text-3xl font-bold text-white my-1">Study with Lumine</h1>
         <div className="flex justify-between">
           <p className="text-sm text-[#E0AAFF]/80"> Empowering Every Learner with AI.</p>
-          <p className="text-sm text-[#E0AAFF]/40"> by github.com/gcarlo11</p>
-          {/* <p className="text-sm text-[#E0AAFF]/40">Powered by Gemini</p> */}
+          <p className="text-[11px] text-[#E0AAFF]/50"> by github.com/gcarlo11</p>
         </div>
       </div>
 

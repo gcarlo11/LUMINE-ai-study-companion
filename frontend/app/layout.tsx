@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Study Companion - Your Personal Learning Companion',
+  title: 'Study with Lumine - Your Personal Learning Companion',
   description: 'Enhance your learning experience with our AI-powered study assistant. Get instant help, explanations, and resources tailored to your needs.',
   generator: 'Next.js',
 }

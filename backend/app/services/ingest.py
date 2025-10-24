@@ -2,8 +2,6 @@ import pdfplumber
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-import json
-import os
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
@@ -29,10 +27,3 @@ def build_index(chunks):
     index = faiss.IndexFlatIP(embeddings.shape[1])
     index.add(np.array(embeddings))
     return index, embeddings
-
-def save_data(chunks, embeddings):
-    os.makedirs('data', exist_ok=True) 
-    
-    np.save('data/embeddings.npy', embeddings) 
-    with open('data/chunks.json', 'w') as f:
-        json.dump(chunks, f)

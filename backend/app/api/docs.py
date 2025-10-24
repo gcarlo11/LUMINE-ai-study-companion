@@ -1,5 +1,6 @@
+import tempfile
 from fastapi import APIRouter, UploadFile, Request 
-from app.services.ingest import extract_text_from_pdf, chunk_text, build_index, save_data
+from app.services.ingest import extract_text_from_pdf, chunk_text, build_index
 import faiss
 import numpy as np 
 import os
@@ -8,26 +9,29 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload_doc(file: UploadFile, request: Request):
-    os.makedirs("uploads", exist_ok=True)
-    
-    file_path = f"uploads/{file.filename}"
-    
+
     try:
-        with open(file_path, "wb") as f:
-            f.write(await file.read())
-            
-        text = extract_text_from_pdf(file_path)
-        chunks = chunk_text(text)
-        index, embeddings = build_index(chunks)
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+            content = await file.read()
+            temp_pdf.write(content)
+            temp_pdf_path = temp_pdf.name
 
-        save_data(chunks, embeddings) 
+            text = extract_text_from_pdf(temp_pdf_path)
+            chunks = chunk_text(text)
+            index, embeddings = build_index(chunks)
 
-        request.app.state.index = index
-        request.app.state.chunks = chunks
-        print(f"--- Index updated in app state. {len(chunks)} chunks loaded. ---")
+            request.app.state.index = index
+            request.app.state.chunks = chunks   
 
-        return {"message": "File processed and index updated", "chunks": len(chunks)}
-    
+            print(f"--- Index updated in app state (memory). {len(chunks)} chunks loaded. ---")
+
+            return {"message": "File processed and index updated in memory", "chunks": len(chunks)}
+
     except Exception as e:
-        print(f"Error during file upload processing: {e}")
-        return {"error": f"Failed to process file: {e}"}
+        print(f"--- DEBUG: Error during file upload and processing: {e} ---")
+        if 'temp_pdf_path' in locals() and os.path.exists(temp_pdf_path):
+            os.unlink(temp_pdf_path)
+        return {"error": f"File processing failed: {e}"}
+    finally:
+        if 'temp_pdf_path' in locals() and os.path.exists(temp_pdf_path):
+            os.unlink(temp_pdf_path)

@@ -16,9 +16,12 @@ router = APIRouter()
 async def ask_question(data: QuestionRequest, request: Request): 
     
     question = data.question 
-    index = request.app.state.index
-    chunks = request.app.state.chunks
+    index = getattr(request.app.state, 'index', None)
+    chunks = getattr(request.app.state, 'chunks', [])
     
+    if index is None or not chunks:
+        return {"answer": "Maaf, silakan unggah dokumen PDF terlebih dahulu sebelum bertanya."}
+
     contexts = retrieval(question, index=index, chunks=chunks) 
     context_text = "\n\n".join(contexts)
 
@@ -26,11 +29,16 @@ async def ask_question(data: QuestionRequest, request: Request):
     You are a helpful study tutor.
     Use the context below to answer the question accurately.
     Cite the sources if possible.
+    **Format your response using clear Markdown:**
+    - Use bullet points (-) for lists.
+    - Use bold (**) for emphasis on key terms or headings.
+    - Ensure proper paragraph spacing for readability.
 
     Context:
     {context_text}
 
     Question: {question}
+    
     """
     
     gemini_api_key = os.getenv('GEMINI_API_KEY')

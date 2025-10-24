@@ -22,10 +22,10 @@ export default function ChatMessage({ message }: { message: Message }) {
       className={`flex ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`max-w-xs lg:max-w-md px-4 py-3 rounded-lg ${
+        className={`prose prose-sm max-w-xs lg:max-w-md px-4 py-1 rounded-lg ${ // Pastikan ada 'prose prose-sm'
           isUser
-            ? "bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD] text-white rounded-br-none"
-            : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20"
+            ? "bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD] text-white rounded-br-none prose-invert"
+            : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20 prose-invert" // 'prose-invert' penting untuk background gelap
         }`}
       >
 

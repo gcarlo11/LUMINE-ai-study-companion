@@ -1,7 +1,11 @@
 from fastapi import APIRouter, Request
 from app.services.retrieval import retrieval
-import os, requests
+import os
+import google.generativeai as genai 
 from pydantic import BaseModel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class QuestionRequest(BaseModel):
     question: str
@@ -37,25 +41,14 @@ async def ask_question(data: QuestionRequest, request: Request):
         return {"error": "GEMINI_API_KEY environment variable not set."}
 
     try:
-        response = requests.post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateText",
-            params={"key": gemini_api_key},
-            json={"prompt": {"text": prompt}}
-        )
+        genai.configure(api_key=gemini_api_key)
 
-        response.raise_for_status() 
-        result = response.json()
-        
-        if "candidates" in result and len(result["candidates"]) > 0:
-            return {"answer": result["candidates"][0]["output"]}
-        else:
-            print("--- DEBUG: Respons tidak valid dari Gemini ---")
-            print(result)
-            return {"error": "No valid response from Gemini.", "details": result}
+        model = genai.GenerativeModel('gemini-2.5-flash-lite')
+
+        response = model.generate_content(prompt)
+
+        return {"answer": response.text}
             
-    except requests.exceptions.RequestException as e:
-        print(f"--- DEBUG: Error request ke Gemini (API Key salah/belum aktif?): {e} ---")
+    except Exception as e:
+        print(f"--- DEBUG: Error dari Google AI SDK: {e} ---")
         return {"error": f"API request failed: {e}"}
-    except KeyError:
-        print(f"--- DEBUG: KeyError saat memproses respons Gemini ---")
-        return {"error": "Invalid response structure from Gemini API.", "details": result}

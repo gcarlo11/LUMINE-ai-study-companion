@@ -1,0 +1,40 @@
+"use client"
+
+import { motion } from "framer-motion"
+
+interface Message {
+  id: string
+  type: "user" | "bot"
+  content: string
+  timestamp: Date
+}
+
+export default function ChatMessage({ message }: { message: Message }) {
+  const isUser = message.type === "user"
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+      className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+    >
+      <div
+        className={`max-w-xs lg:max-w-md px-4 py-3 rounded-lg ${
+          isUser
+            ? "bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD] text-white rounded-br-none"
+            : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20"
+        }`}
+      >
+        <p className="text-sm leading-relaxed">{message.content}</p>
+        <p className={`text-xs mt-1 ${isUser ? "text-[#E0AAFF]/60" : "text-[#7B2CBF]/60"}`}>
+          {message.timestamp.toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </p>
+      </div>
+    </motion.div>
+  )
+}

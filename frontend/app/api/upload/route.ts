@@ -13,10 +13,15 @@ export async function POST(request: NextRequest) {
     const backendFormData = new FormData()
     backendFormData.append("file", file)
 
-    const response = await fetch("http://localhost:8000/upload", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/upload`, {
       method: "POST",
       body: backendFormData,
     })
+    
+    // const response = await fetch("http://localhost:8000/docs/upload", {
+    //   method: "POST",
+    //   body: backendFormData,
+    // })
 
     if (!response.ok) {
       throw new Error("Backend upload failed")

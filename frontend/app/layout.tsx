@@ -7,9 +7,9 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Study Companion - Your Personal Learning Companion',
+  description: 'Enhance your learning experience with our AI-powered study assistant. Get instant help, explanations, and resources tailored to your needs.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({

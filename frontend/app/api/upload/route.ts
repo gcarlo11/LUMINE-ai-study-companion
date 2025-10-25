@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    // Forward to FastAPI backend
     const backendFormData = new FormData()
     backendFormData.append("file", file)
 
@@ -17,11 +16,6 @@ export async function POST(request: NextRequest) {
       method: "POST",
       body: backendFormData,
     })
-    
-    // const response = await fetch("http://localhost:8000/docs/upload", {
-    //   method: "POST",
-    //   body: backendFormData,
-    // })
 
     if (!response.ok) {
       throw new Error("Backend upload failed")

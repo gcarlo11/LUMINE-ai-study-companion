@@ -26,14 +26,14 @@ export default function ChatbotUI() {
       id: "1",
       type: "bot",
       content:
-        "Hi! I am **Lumine**, your friendly study assistant.",
+        "Hi! I am **Lumine**, your friendly study assistant👋😄",
       timestamp: new Date(),
     },
     {
       id: "2",
       type: "bot",
       content:
-        "Please upload your **PDF document or notes** for study then ask me any question.",
+        "Please upload your **PDF document** or **notes** for study then ask me any question.",
       timestamp: new Date(),
     },
   ])
@@ -79,7 +79,7 @@ export default function ChatbotUI() {
         id: Date.now().toString(),
         type: "bot",
         // content: `File processed successfully! Dokumen telah dianalisis dengan ${data.chunks || 0} chunks. ${data.analysis ? "Hasil analisis tersedia." : ""}`,
-        content: `File processed successfully! Dokumen telah dianalisis dengan ${data.chunks || 0} chunks. ${data.analysis ? "Hasil analisis tersedia." : ""}`,
+        content: `File processed **successfully**! You can now ask me questions related to the document.`,
         timestamp: new Date(),
       }
 
@@ -88,7 +88,7 @@ export default function ChatbotUI() {
       const errorMessage: Message = {
         id: Date.now().toString(),
         type: "bot",
-        content: "Sorry, there was an issue on proccessing document. Please try again.",
+        content: "Sorry, there was an issue on proccessing document. **Please try again.**",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -139,7 +139,7 @@ export default function ChatbotUI() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "bot",
-        content: "Sorry, there was an issue on sending your message. Please try again.",
+        content: "Sorry, there was an issue on sending your message. **Please try again.**",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage]);
@@ -165,14 +165,27 @@ export default function ChatbotUI() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col h-[600px] bg-linear-to-b from-[#1a1a2e] to-[#121212] rounded-2xl border border-[#7B2CBF]/30 shadow-2xl overflow-hidden"
+      className="flex flex-col h-[640px] bg-linear-to-b from-[#1a1a2e] to-[#121212] rounded-2xl border border-[#7B2CBF]/30 shadow-2xl overflow-hidden"
     >
       {/* Header */}
       <div className="bg-linear-to-r from-[#7B2CBF] to-[#9D4EDD] px-6 py-4 border-b border-[#7B2CBF]/50">
-        <h1 className="text-3xl font-bold text-white my-1">Study with Lumine</h1>
-        <div className="flex justify-between">
+        <h1 className="text-3xl font-bold text-white my-1 flex items-center gap-0.5">
+          <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" strokeWidth="0.00024000000000000003">
+          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g id="SVGRepo_iconCarrier"> 
+            <path d="M10 12C10 12.5523 9.55228 13 9 13C8.44772 13 8 12.5523 8 12C8 11.4477 8.44772 11 9 11C9.55228 11 10 11.4477 10 12Z" fill="#ffffff"></path> 
+            <path d="M15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13Z" fill="#ffffff"></path> 
+            <path fillRule="evenodd" clipRule="evenodd" d="M12.0244 2.00003L12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.74235 17.9425 2.43237 12.788 2.03059L12.7886 2.0282C12.5329 2.00891 12.278 1.99961 12.0244 2.00003ZM12 20C16.4183 20 20 16.4183 20 12C20 11.3014 19.9105 10.6237 19.7422 9.97775C16.1597 10.2313 12.7359 8.52461 10.7605 5.60246C9.31322 7.07886 7.2982 7.99666 5.06879 8.00253C4.38902 9.17866 4 10.5439 4 12C4 16.4183 7.58172 20 12 20ZM11.9785 4.00003L12.0236 4.00003L12 4L11.9785 4.00003Z" 
+            fill="#ffffff"></path>
+            </g>
+          </svg>
+          Study with Lumine
+        </h1>
+
+        <div className="flex justify-between mt-1">
           <p className="text-sm text-[#E0AAFF]/80"> Empowering Every Learner with AI.</p>
-          <p className="text-[11px] text-[#E0AAFF]/50"> by github.com/gcarlo11</p>
+          <p className="text-[11px] text-[#E0AAFF]/60">by github.com/gcarlo11</p>
         </div>
       </div>
 
@@ -231,8 +244,9 @@ export default function ChatbotUI() {
           exit={{ opacity: 0, height: 0 }}
           className="border-t border-[#7B2CBF]/30 bg-[#1a1a2e] px-6 py-3 text-sm text-[#E0AAFF]"
         >
-          <p className="font-semibold mb-2">📊 Analysis Results:</p>
-          <p>Chunks: {analysisData.chunks}</p>
+          <p className="text-[12px] font-mono text-"> ☑️ Your document has been successfully analyzed</p>
+          {/* <p>Chunks: {analysisData.chunks}</p> */}
+
           {analysisData.analysis && (
             <pre className="text-xs mt-2 overflow-auto max-h-20 text-[#9D4EDD]">
               {JSON.stringify(analysisData.analysis, null, 2)}

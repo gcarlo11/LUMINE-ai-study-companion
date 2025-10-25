@@ -9,11 +9,11 @@ export default function Home() {
         <motion.div
           className="absolute w-96 h-96 bg-gradient-to-r from-[#7B2CBF] to-[#E0AAFF] rounded-full blur-3xl opacity-20"
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
+            x: [0, 2, 0],
+            y: [0, 1, 0],
           }}
           transition={{
-            duration: 8,
+            duration: 15,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
@@ -22,8 +22,8 @@ export default function Home() {
         <motion.div
           className="absolute w-96 h-96 bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF] rounded-full blur-3xl opacity-15"
           animate={{
-            x: [0, -100, 0],
-            y: [0, -50, 0],
+            x: [0, 2, 0],
+            y: [0, 1, 0],
           }}
           transition={{
             duration: 10,
@@ -34,7 +34,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl">
+      <div className="relative z-10 w-full max-w-3xl">
         <ChatbotUI />
       </div>
     </div>

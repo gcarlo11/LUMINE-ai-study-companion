@@ -22,10 +22,10 @@ export default function ChatMessage({ message }: { message: Message }) {
       className={`flex ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`prose prose-sm max-w-xs lg:max-w-md px-4 py-1 rounded-lg ${ // Pastikan ada 'prose prose-sm'
+        className={`prose prose-sm max-w-xs lg:max-w-md px-4 py-1 rounded-lg prose-p:my-0.5 prose-p:py-0.5 prose-p:leading-relaxed   ${ // Pastikan  'prose prose-sm'
           isUser
             ? "bg-gradient-to-r from-[#7B2CBF] to-[#9D4EDD] text-white rounded-br-none prose-invert"
-            : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20 prose-invert" // 'prose-invert' penting untuk background gelap
+            : "bg-[#2A2A2A] text-[#E0AAFF] rounded-bl-none border border-[#7B2CBF]/20 prose-invert" // 'prose-invert'  untuk background gelap
         }`}
       >
 
@@ -34,7 +34,7 @@ export default function ChatMessage({ message }: { message: Message }) {
           <ReactMarkdown>{message.content}</ReactMarkdown>
         </div>
         
-        <p className={`text-[10px] mt-1 ${isUser ? "text-[#E0AAFF]/60" : "text-[#7B2CBF]/60"}`}>
+        <p className={`text-[10px] mt-0 ${isUser ? "text-[#E0AAFF]/60" : "text-[#7B2CBF]/60"}`}>
           {message.timestamp.toLocaleTimeString("id-ID", {
             hour: "2-digit",
             minute: "2-digit",

@@ -29,8 +29,8 @@ export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         disabled={disabled}
-        placeholder="Ketik pesan Anda..."
-        className="flex-1 px-4 py-3 rounded-lg bg-[#2A2A2A] text-white placeholder-[#7B2CBF]/50 border border-[#7B2CBF]/30 focus:border-[#7B2CBF] focus:outline-none transition-all duration-200 disabled:opacity-50"
+        placeholder="Ask Lumine..."
+        className="text-sm flex-1 px-4 py-3 rounded-lg bg-[#2A2A2A] text-white placeholder-[#7B2CBF]/50 border border-[#7B2CBF]/30 focus:border-[#7B2CBF] focus:outline-none transition-all duration-200 disabled:opacity-50"
       />
       <motion.button
         whileHover={{ scale: 1.05 }}

@@ -135,7 +135,3 @@ The sleek and modern interface, built with Next.js and styled with Tailwind CSS 
 3.  **Ask Questions:** Once the file is processed, type your questions about the document content into the chat input and press Send.
 4.  **Receive Answers:** The AI will generate answers based *only* on the information present in the uploaded PDF.
 5.  **New Document/Session:** Uploading a new PDF will replace the previous document's context in the backend's memory. Restarting the backend server will also clear the memory.
-
----
-
-*(Optional Sections - Add if needed)*

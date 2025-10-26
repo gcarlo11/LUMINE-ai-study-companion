@@ -8,14 +8,14 @@
 
 ## ✨ Overview
 
-<p align="left">
+<p align="center">
   <img src="images/Screenshot 1.png" alt="Preview 1" width="300"/>
   <img src="images/Screenshot 2.png" alt="Preview 2" width="300"/>
-</p
-<p align="left">
+  <br>
   <img src="images/Screenshot 3.png" alt="Preview 3" width="300"/>
   <img src="images/Screenshot 4.png" alt="Preview 4" width="300"/>
 </p>
+
 
 
 Adaptive Study Companion is a web application that leverages the power of Large Language Models (LLMs) to provide an interactive and adaptive learning experience. Simply upload your PDF documents (lecture notes, articles, textbooks), and the AI assistant will help you understand the content, answer your questions, and provide summaries based *specifically* on the uploaded material.
